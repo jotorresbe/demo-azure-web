@@ -1,0 +1,319 @@
+/* Variables de color para un tema sci-fi oscuro y dinámico */
+:root {
+    --bg-dark: #0a0a0a;
+    --bg-panel: #141414;
+    --text-main: #e0e0e0;
+    --accent: #bb86fc;
+    --accent-glow: rgba(187, 134, 252, 0.6);
+    --border: #333;
+}
+
+/* Animación de entrada general */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+body {
+    font-family: 'Georgia', serif;
+    margin: 0;
+    display: flex;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Personalización de la barra de desplazamiento (Scrollbar) */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+}
+
+/* --- BARRA LATERAL (Sidebar) --- */
+.sidebar {
+    width: 260px;
+    background-color: var(--bg-panel);
+    padding: 2rem 1.5rem;
+    border-right: 1px solid var(--border);
+    box-shadow: 2px 0 15px rgba(0,0,0,0.5);
+    z-index: 10;
+}
+
+.sidebar h2 {
+    color: var(--accent);
+    font-family: 'Arial', sans-serif;
+    font-size: 1.4rem;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 10px;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Grupos Desplegables (Acordeón) */
+.nav-group {
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 0.5rem;
+}
+
+/* El título de la categoría */
+.nav-group summary {
+    font-family: 'Arial', sans-serif;
+    font-size: 1.05rem;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    padding: 0.5rem 0;
+    list-style: none; /* Oculta la flecha por defecto del navegador */
+    position: relative;
+    transition: color 0.3s;
+    user-select: none;
+}
+
+/* Ocultar flecha nativa en navegadores webkit (Chrome/Safari) */
+.nav-group summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Nuestra flecha personalizada que rota */
+.nav-group summary::before {
+    content: '▼';
+    font-size: 0.7rem;
+    color: var(--accent);
+    display: inline-block;
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+}
+
+/* Cuando el grupo está cerrado, la flecha apunta a la derecha */
+.nav-group:not([open]) summary::before {
+    transform: rotate(-90deg);
+}
+
+.nav-group summary:hover {
+    color: var(--accent);
+    text-shadow: 0 0 8px var(--accent-glow);
+}
+
+/* La lista anidada debajo de cada categoría */
+.nav-group ul {
+    list-style: none;
+    margin: 0.5rem 0 0 0;
+    padding-left: 1rem;
+    border-left: 1px dashed var(--border); /* Línea guía del árbol de jerarquía */
+}
+
+.nav-group li {
+    margin-bottom: 0.8rem;
+    position: relative;
+}
+
+/* Pequeña línea horizontal que conecta el ítem con la línea vertical */
+.nav-group li::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: -1rem;
+    width: 0.8rem;
+    height: 1px;
+    background-color: var(--border);
+    border-top: 1px dashed var(--border);
+}
+
+/* Estilo de los enlaces anidados */
+.sidebar a {
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-family: 'Arial', sans-serif;
+    display: inline-block;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.sidebar a:hover {
+    color: #fff;
+    transform: translateX(5px);
+    text-shadow: 0 0 8px var(--accent-glow);
+}
+
+/* --- CONTENIDO PRINCIPAL --- */
+.content {
+    flex: 1;
+    padding: 3rem 5rem;
+    position: relative;
+    animation: fadeIn 0.8s ease-out; /* La página aparece suavemente al cargar */
+}
+
+.content h1 {
+    font-family: 'Arial', sans-serif;
+    font-size: 3rem;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 0.5rem;
+    margin-top: 0;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255,255,255,0.1);
+}
+
+/* --- CAJA DE INFORMACIÓN (Infobox interactivo) --- */
+.infobox {
+    float: right;
+    width: 280px;
+    background-color: var(--bg-panel);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    margin: 0 0 2rem 3rem;
+    border-radius: 8px;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.95rem;
+    transition: all 0.4s ease; /* Transición suave */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Efecto Hover en la Infobox */
+.infobox:hover {
+    transform: translateY(-8px) scale(1.02); /* Se levanta y crece ligeramente */
+    box-shadow: 0 12px 25px rgba(0,0,0,0.6), 0 0 15px var(--accent-glow);
+    border-color: var(--accent);
+}
+
+.infobox h3 {
+    margin-top: 0;
+    text-align: center;
+    color: var(--accent);
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+}
+
+.infobox hr {
+    border-color: var(--border);
+    margin: 1rem 0;
+}
+
+.infobox p {
+    margin: 0.8rem 0;
+    border-bottom: 1px dashed #222;
+    padding-bottom: 0.5rem;
+}
+
+.infobox p:last-child {
+    border-bottom: none;
+}
+
+/* --- TEXTO DEL ARTÍCULO --- */
+.texto-articulo {
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+
+.texto-articulo h2 {
+    color: var(--accent);
+    margin-top: 2.5rem;
+    font-family: 'Arial', sans-serif;
+    display: inline-block;
+    position: relative;
+}
+
+/* Subrayado dinámico en los subtítulos */
+.texto-articulo h2::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--accent);
+    transition: width 0.4s ease;
+}
+
+.texto-articulo h2:hover::after {
+    width: 100%; /* La línea crece al pasar el cursor */
+}
+
+/* --- GALERÍA DE IMÁGENES SCI-FI --- */
+.galeria-archivos {
+    margin-top: 4rem;
+    border-top: 1px solid var(--border);
+    padding-top: 2rem;
+}
+
+.galeria-archivos h2 {
+    color: var(--accent);
+    font-family: 'Arial', sans-serif;
+    margin-bottom: 2rem;
+}
+
+/* El sistema de grilla automático */
+.grid-galeria {
+    display: grid;
+    /* Esto hace que sea responsivo: cabrán tantas columnas de mínimo 220px como el ancho permita */
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Contenedor de cada imagen */
+.item-galeria {
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden; /* Evita que la imagen se salga al hacer zoom */
+    border: 1px solid var(--border);
+    cursor: pointer;
+    background-color: var(--bg-panel);
+    height: 200px;
+    transition: all 0.4s ease;
+}
+
+/* La imagen dentro de la tarjeta */
+.item-galeria img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Asegura que la imagen llene el espacio sin deformarse */
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Capa de texto oculta que sube al hacer hover */
+.overlay {
+    position: absolute;
+    bottom: -100%; /* Empieza escondida por debajo */
+    left: 0;
+    width: 100%;
+    background: rgba(10, 10, 10, 0.85); /* Fondo oscuro semitransparente */
+    color: var(--text-main);
+    padding: 1rem;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.9rem;
+    font-weight: bold;
+    box-sizing: border-box;
+    border-top: 1px solid var(--accent);
+    transition: bottom 0.4s ease; /* Animación de subida */
+}
+
+/* --- EFECTOS HOVER DE LA GALERÍA --- */
+.item-galeria:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 15px var(--accent-glow);
+    transform: translateY(-5px); /* Se levanta un poquito */
+}
+
+/* Efecto de Zoom a la imagen */
+.item-galeria:hover img {
+    transform: scale(1.15); /* Acercamiento suave */
+    opacity: 0.7; /* Se oscurece un poco para que el texto resalte */
+}
+
+/* El texto sube y aparece */
+.item-galeria:hover .overlay {
+    bottom: 0;
+}
